@@ -1,0 +1,589 @@
+## SLURM PROLOG ###############################################################
+##    Job ID : 9866151
+##  Job Name : scvae_mouse
+##  Nodelist : gpu1201
+##      CPUs : 
+##  Mem/Node : 30720 MB
+## Directory : /gpfs/scratch/srajakum/Structure_VAE_scRNA_Simulator/Models/scvae
+##   Job Started : Thu May  4 08:36:17 EDT 2023
+###############################################################################
+test data shape: (43, 1000)
+train data shape: (205, 1000)
+latent size: 63
+kl weight: 0.6440748973967908
+Data
+════
+
+Data Format: mtx_fbe
+before commented code in data/data_set.py
+self.preprocessed_values is defined
+Copying values for full set.
+Data set copied (2 ms).
+
+Loading original data set.
+Num of cells = 205 | Num of genes = 1000
+Original data set loaded (55 ms).
+
+Converting data set value array to sparse matrix.
+Data set value array converted (3 ms).
+
+Model
+═════
+
+Model setup:
+    type: VAE
+    feature size: 1000
+    latent size: 63
+    hidden sizes: 100
+    latent distribution: gaussian
+    reconstruction distribution: poisson
+    Monte Carlo samples: 1
+    importance samples: 1
+    KL weigth: 0.6440748973967908
+    using analytical KL term
+    using batch normalisation for minibatches
+    using linear warm-up weighting for the first 1 epochs
+    early stopping: after 10 epoch with no improvements
+
+Trainable parameters
+    ENCODER/1/DENSE/weights:0            (1000, 100)
+    ENCODER/1/DENSE/biases:0             (100,)
+    ENCODER/1/BATCH_NORM/beta:0          (100,)
+    POSTERIOR/MU/DENSE/weights:0         (100, 63)
+    POSTERIOR/MU/DENSE/biases:0          (63,)
+    POSTERIOR/LOG_SIGMA/DENSE/weights:0  (100, 63)
+    POSTERIOR/LOG_SIGMA/DENSE/biases:0   (63,)
+    DECODER/1/DENSE/weights:0            (63, 100)
+    DECODER/1/DENSE/biases:0             (100,)
+    DECODER/1/BATCH_NORM/beta:0          (100,)
+    X_TILDE/LOG_LAMBDA/DENSE/weights:0   (100, 1000)
+    X_TILDE/LOG_LAMBDA/DENSE/biases:0    (1000,)
+
+Training
+────────
+
+validation set given?: False
+training set shape: (205, 1000)
+Preparing data.
+training_set.values type: <class 'data.sparse.SparseRowMatrix'>
+training_set.preprocessed_values type: <class 'scipy.sparse.csc.csc_matrix'>
+Data prepared (<1 ms).
+
+Initialising model parameters.
+Model parameters initialised (209 ms).
+
+Training model for 50 epochs on original values.
+
+Step 1 (1.32 s): -4.9462e+05.
+Step 2 (11 ms): -5.0709e+05.
+
+Epoch 1 (1.34 s):
+    Warm-up weight: 0
+    Evaluating model.
+    Full set (331 ms): ELBO: -2.146e+06, ENRE: -2.1242e+06, KL: 21734.
+    Saving model parameters.
+    Model parameters saved (83 ms).
+
+Step 3 (12 ms): -5.0049e+05.
+Step 4 (8 ms): -4.9561e+05.
+
+Epoch 2 (22 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -1.5756e+06, ENRE: -1.5619e+06, KL: 13698.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 5 (11 ms): -4.9905e+05.
+Step 6 (10 ms): -4.9429e+05.
+
+Epoch 3 (21 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -1.3856e+06, ENRE: -1.3749e+06, KL: 10687.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 7 (10 ms): -5.0542e+05.
+Step 8 (10 ms): -4.7914e+05.
+
+Epoch 4 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -1.1735e+06, ENRE: -1.1644e+06, KL: 9035.8.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 9 (10 ms): -5.141e+05.
+Step 10 (10 ms): -4.6231e+05.
+
+Epoch 5 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -1.1089e+06, ENRE: -1.101e+06, KL: 7920.5.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 11 (10 ms): -5.27e+05.
+Step 12 (9 ms): -4.4381e+05.
+
+Epoch 6 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -9.7354e+05, ENRE: -9.6638e+05, KL: 7160.6.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 13 (10 ms): -5.1977e+05.
+Step 14 (10 ms): -4.5311e+05.
+
+Epoch 7 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -9.9671e+05, ENRE: -9.9015e+05, KL: 6567.4.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 15 (10 ms): -4.8974e+05.
+Step 16 (9 ms): -4.9755e+05.
+
+Epoch 8 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -8.9275e+05, ENRE: -8.8669e+05, KL: 6060.2.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 17 (10 ms): -4.6541e+05.
+Step 18 (10 ms): -5.3511e+05.
+
+Epoch 9 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -8.1581e+05, ENRE: -8.1017e+05, KL: 5644.9.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 19 (10 ms): -5.1374e+05.
+Step 20 (10 ms): -4.5181e+05.
+
+Epoch 10 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -8.6924e+05, ENRE: -8.639e+05, KL: 5344.2.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 21 (10 ms): -4.9915e+05.
+Step 22 (9 ms): -4.7831e+05.
+
+Epoch 11 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -7.8088e+05, ENRE: -7.7583e+05, KL: 5050.3.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 23 (10 ms): -4.8712e+05.
+Step 24 (10 ms): -4.9561e+05.
+
+Epoch 12 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -7.775e+05, ENRE: -7.727e+05, KL: 4799.3.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 25 (11 ms): -4.9301e+05.
+Step 26 (7 ms): -4.8044e+05.
+
+Epoch 13 (18 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -7.8744e+05, ENRE: -7.8285e+05, KL: 4589.4.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 27 (10 ms): -5.2786e+05.
+Step 28 (9 ms): -4.1895e+05.
+
+Epoch 14 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -7.6756e+05, ENRE: -7.6314e+05, KL: 4411.2.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 29 (11 ms): -4.7463e+05.
+Step 30 (9 ms): -5.1056e+05.
+
+Epoch 15 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -7.5958e+05, ENRE: -7.5534e+05, KL: 4235.1.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 31 (10 ms): -5.1233e+05.
+Step 32 (10 ms): -4.4439e+05.
+
+Epoch 16 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -7.2941e+05, ENRE: -7.2533e+05, KL: 4087.1.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 33 (10 ms): -4.7504e+05.
+Step 34 (9 ms): -5.0331e+05.
+
+Epoch 17 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.8916e+05, ENRE: -6.8522e+05, KL: 3937.6.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 35 (10 ms): -4.9509e+05.
+Step 36 (9 ms): -4.6805e+05.
+
+Epoch 18 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.5842e+05, ENRE: -6.5462e+05, KL: 3802.2.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 37 (11 ms): -4.7743e+05.
+Step 38 (8 ms): -4.9446e+05.
+
+Epoch 19 (19 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.76e+05, ENRE: -6.7233e+05, KL: 3673.3.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 39 (10 ms): -4.6012e+05.
+Step 40 (9 ms): -5.2201e+05.
+
+Epoch 20 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -7.0611e+05, ENRE: -7.0255e+05, KL: 3560.7.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 41 (11 ms): -5.1505e+05.
+Step 42 (9 ms): -4.2678e+05.
+
+Epoch 21 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.8761e+05, ENRE: -6.8415e+05, KL: 3461.5.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 43 (10 ms): -4.9361e+05.
+Step 44 (9 ms): -4.6018e+05.
+
+Epoch 22 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.574e+05, ENRE: -6.5404e+05, KL: 3367.6.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 45 (11 ms): -4.9222e+05.
+Step 46 (9 ms): -4.6137e+05.
+
+Epoch 23 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.4349e+05, ENRE: -6.4022e+05, KL: 3272.3.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 47 (10 ms): -5.1271e+05.
+Step 48 (9 ms): -4.22e+05.
+
+Epoch 24 (19 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.313e+05, ENRE: -6.2811e+05, KL: 3189.9.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 49 (10 ms): -4.6399e+05.
+Step 50 (9 ms): -5.0461e+05.
+
+Epoch 25 (19 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.4052e+05, ENRE: -6.3741e+05, KL: 3107.6.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 51 (10 ms): -4.4766e+05.
+Step 52 (9 ms): -5.2971e+05.
+
+Epoch 26 (19 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.2754e+05, ENRE: -6.2451e+05, KL: 3026.9.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 53 (10 ms): -4.8719e+05.
+Step 54 (9 ms): -4.6025e+05.
+
+Epoch 27 (19 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.1089e+05, ENRE: -6.0793e+05, KL: 2956.5.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 55 (10 ms): -4.7015e+05.
+Step 56 (9 ms): -4.8397e+05.
+
+Epoch 28 (19 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.5186e+05, ENRE: -6.4897e+05, KL: 2887.9.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 57 (10 ms): -4.4319e+05.
+Step 58 (9 ms): -5.286e+05.
+
+Epoch 29 (19 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.2499e+05, ENRE: -6.2217e+05, KL: 2817.8.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 59 (10 ms): -4.6076e+05.
+Step 60 (9 ms): -5.0268e+05.
+
+Epoch 30 (19 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.0899e+05, ENRE: -6.0623e+05, KL: 2754.2.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 61 (10 ms): -4.8456e+05.
+Step 62 (9 ms): -4.532e+05.
+
+Epoch 31 (19 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -5.9811e+05, ENRE: -5.9542e+05, KL: 2693.9.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 63 (11 ms): -4.917e+05.
+Step 64 (8 ms): -4.4231e+05.
+
+Epoch 32 (19 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.0906e+05, ENRE: -6.0643e+05, KL: 2639.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 65 (10 ms): -4.3922e+05.
+Step 66 (9 ms): -5.2869e+05.
+
+Epoch 33 (19 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.3277e+05, ENRE: -6.3019e+05, KL: 2583.3.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 67 (10 ms): -4.5114e+05.
+Step 68 (8 ms): -5.0598e+05.
+
+Epoch 34 (18 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.1117e+05, ENRE: -6.0864e+05, KL: 2529.8.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 69 (10 ms): -4.518e+05.
+Step 70 (8 ms): -5.0529e+05.
+
+Epoch 35 (18 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -5.9967e+05, ENRE: -5.9719e+05, KL: 2481.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 71 (11 ms): -4.3797e+05.
+Step 72 (7 ms): -5.2183e+05.
+
+Epoch 36 (18 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.0454e+05, ENRE: -6.0211e+05, KL: 2435.3.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 73 (10 ms): -4.5535e+05.
+Step 74 (8 ms): -4.8941e+05.
+
+Epoch 37 (18 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -5.5514e+05, ENRE: -5.5275e+05, KL: 2394.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 75 (10 ms): -4.6435e+05.
+Step 76 (8 ms): -4.741e+05.
+
+Epoch 38 (18 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.1126e+05, ENRE: -6.0891e+05, KL: 2350.9.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 77 (10 ms): -4.831e+05.
+Step 78 (8 ms): -4.3809e+05.
+
+Epoch 39 (18 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.3046e+05, ENRE: -6.2815e+05, KL: 2314.2.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 79 (10 ms): -4.6392e+05.
+Step 80 (8 ms): -4.7134e+05.
+
+Epoch 40 (18 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.4443e+05, ENRE: -6.4215e+05, KL: 2276.9.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 81 (10 ms): -4.406e+05.
+Step 82 (8 ms): -5.0382e+05.
+
+Epoch 41 (18 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -5.8e+05, ENRE: -5.7776e+05, KL: 2240.
+    Saving model parameters.
+    Model parameters saved (56 ms).
+
+Step 83 (13 ms): -4.2498e+05.
+Step 84 (8 ms): -5.3003e+05.
+
+Epoch 42 (21 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.2288e+05, ENRE: -6.2068e+05, KL: 2203.4.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 85 (10 ms): -4.6601e+05.
+Step 86 (7 ms): -4.6256e+05.
+
+Epoch 43 (18 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -5.6435e+05, ENRE: -5.6218e+05, KL: 2171.5.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 87 (10 ms): -4.6763e+05.
+Step 88 (8 ms): -4.5528e+05.
+
+Epoch 44 (18 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.1518e+05, ENRE: -6.1304e+05, KL: 2141.8.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 89 (10 ms): -4.9137e+05.
+Step 90 (8 ms): -4.1141e+05.
+
+Epoch 45 (18 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -5.9918e+05, ENRE: -5.9707e+05, KL: 2111.5.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 91 (12 ms): -4.7491e+05.
+Step 92 (8 ms): -4.3404e+05.
+
+Epoch 46 (20 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.4833e+05, ENRE: -6.4625e+05, KL: 2080.9.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 93 (11 ms): -4.7412e+05.
+Step 94 (7 ms): -4.366e+05.
+
+Epoch 47 (18 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -5.7642e+05, ENRE: -5.7437e+05, KL: 2052.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 95 (10 ms): -4.6087e+05.
+Step 96 (8 ms): -4.5673e+05.
+
+Epoch 48 (18 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -5.7594e+05, ENRE: -5.7392e+05, KL: 2023.8.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 97 (10 ms): -4.3323e+05.
+Step 98 (8 ms): -4.945e+05.
+
+Epoch 49 (18 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -6.2376e+05, ENRE: -6.2177e+05, KL: 1994.5.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 99 (10 ms): -4.893e+05.
+Step 100 (7 ms): -4.0445e+05.
+
+Epoch 50 (18 ms):
+    Evaluating model.
+    Full set (9 ms): ELBO: -5.9073e+05, ENRE: -5.8876e+05, KL: 1971.1.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Model trained for 50 epochs (6.25 s).
+
+Data
+════
+
+Data Format: mtx_fbe
+before commented code in data/data_set.py
+self.preprocessed_values is defined
+Copying values for full set.
+Data set copied (1 ms).
+
+Loading original data set.
+Num of cells = 43 | Num of genes = 1000
+Original data set loaded (12 ms).
+
+Converting data set value array to sparse matrix.
+Data set value array converted (<1 ms).
+
+Model
+═════
+
+Analysis
+────────
+
+Results
+═══════
+
+Evaluation set: full set.
+Model version: end of training.
+
+End of training
+───────────────
+
+End-of-training evaluation
+--------------------------
+
+Evaluating trained model on original values.
+    Full set (359 ms):  ELBO: -1.2785e+06, ENRE: -1.2744e+06, KL: 4038.
+
+End-of-training sampling
+------------------------
+
+sample size in sample method: 43
+Sampling 43 examples from model.
+Examples sampled (130 ms).
+
+test labels shape: (43, 1000)
+test preds shape: (43, 1000)
+save dir: /users/srajakum/scratch/Structure_VAE_scRNA_Simulator/baseline_results/scVAE/mouse_cortex1_smart_seq/2023-05-04-at-08-36-24_ttp_0_tuned
+dir exists? True
+KS performance (sum): 5.423 
+
+                  KS    p
+mean_gene      0.650  0.0
+var_gene       0.773  0.0
+mean_var_gene  1.000  0.0
+mean_cell      1.000  0.0
+var_cell       1.000  0.0
+mean_var_cell  1.000  0.0
+Test PCC: 0.1521668286438871
+Test SCC: 0.5999423204308713
+finished saving

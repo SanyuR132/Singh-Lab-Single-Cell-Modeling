@@ -1,0 +1,989 @@
+## SLURM PROLOG ###############################################################
+##    Job ID : 9901563
+##  Job Name : scvae_pbmc
+##  Nodelist : gpu1202
+##      CPUs : 
+##  Mem/Node : 30720 MB
+## Directory : /gpfs/scratch/srajakum/Structure_VAE_scRNA_Simulator/Models/scvae
+##   Job Started : Thu May 11 12:00:41 EDT 2023
+###############################################################################
+test data shape: (10286, 2000)
+train data shape: (48005, 2000)
+latent size: 42
+kl weight: 1.3311389120122017
+Data
+════
+
+Data Format: mtx_fbe
+before commented code in data/data_set.py
+self.preprocessed_values is defined
+Copying values for full set.
+Data set copied (41 ms).
+
+Loading original data set.
+Num of cells = 48005 | Num of genes = 2000
+Original data set loaded (3.77 s).
+
+Converting data set value array to sparse matrix.
+Data set value array converted (1.59 s).
+
+Model
+═════
+
+Model setup:
+    type: VAE
+    feature size: 2000
+    latent size: 42
+    hidden sizes: 100
+    latent distribution: gaussian
+    reconstruction distribution: poisson
+    Monte Carlo samples: 1
+    importance samples: 1
+    KL weigth: 1.3311389120122017
+    using analytical KL term
+    using batch normalisation for minibatches
+    using linear warm-up weighting for the first 1 epochs
+    early stopping: after 10 epoch with no improvements
+
+Trainable parameters
+    ENCODER/1/DENSE/weights:0            (2000, 100)
+    ENCODER/1/DENSE/biases:0             (100,)
+    ENCODER/1/BATCH_NORM/beta:0          (100,)
+    POSTERIOR/MU/DENSE/weights:0         (100, 42)
+    POSTERIOR/MU/DENSE/biases:0          (42,)
+    POSTERIOR/LOG_SIGMA/DENSE/weights:0  (100, 42)
+    POSTERIOR/LOG_SIGMA/DENSE/biases:0   (42,)
+    DECODER/1/DENSE/weights:0            (42, 100)
+    DECODER/1/DENSE/biases:0             (100,)
+    DECODER/1/BATCH_NORM/beta:0          (100,)
+    X_TILDE/LOG_LAMBDA/DENSE/weights:0   (100, 2000)
+    X_TILDE/LOG_LAMBDA/DENSE/biases:0    (2000,)
+
+Training
+────────
+
+validation set given?: False
+training set shape: (48005, 2000)
+Preparing data.
+training_set.values type: <class 'data.sparse.SparseRowMatrix'>
+training_set.preprocessed_values type: <class 'scipy.sparse.csc.csc_matrix'>
+Data prepared (<1 ms).
+
+Initialising model parameters.
+Model parameters initialised (220 ms).
+
+Training model for 50 epochs on original values.
+
+Step 38 (18 ms): -2334.
+Step 75 (18 ms): -2068.
+Step 113 (18 ms): -1797.3.
+Step 150 (18 ms): -1666.7.
+Step 188 (18 ms): -1442.
+Step 226 (18 ms): -1315.5.
+Step 263 (18 ms): -1203.9.
+Step 301 (18 ms): -1117.2.
+Step 338 (18 ms): -1001.5.
+Step 376 (11 ms): -853.26.
+
+Epoch 1 (8.08 s):
+    Warm-up weight: 0
+    Evaluating model.
+    Full set (4.09 s): ELBO: -817.29, ENRE: -752.92, KL: 64.367.
+    Saving model parameters.
+    Model parameters saved (88 ms).
+
+Step 414 (18 ms): -910.82.
+Step 451 (18 ms): -751.21.
+Step 489 (19 ms): -706.73.
+Step 526 (18 ms): -665.64.
+Step 564 (18 ms): -609.22.
+Step 602 (18 ms): -569.5.
+Step 639 (18 ms): -545.84.
+Step 677 (18 ms): -517.68.
+Step 714 (18 ms): -512.3.
+Step 752 (10 ms): -710.3.
+
+Epoch 2 (6.7 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -591.74, ENRE: -563.91, KL: 27.832.
+    Saving model parameters.
+    Model parameters saved (57 ms).
+
+Step 790 (18 ms): -469.31.
+Step 827 (18 ms): -440.46.
+Step 865 (18 ms): -437.33.
+Step 902 (18 ms): -420.37.
+Step 940 (18 ms): -402.43.
+Step 978 (18 ms): -401.01.
+Step 1015 (18 ms): -376.8.
+Step 1053 (18 ms): -372.21.
+Step 1090 (18 ms): -362.02.
+Step 1128 (9 ms): -312.83.
+
+Epoch 3 (6.73 s):
+    Evaluating model.
+    Full set (3.76 s): ELBO: -412.06, ENRE: -392.32, KL: 19.735.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 1166 (17 ms): -345.15.
+Step 1203 (18 ms): -343.91.
+Step 1241 (18 ms): -322.09.
+Step 1278 (18 ms): -333.18.
+Step 1316 (18 ms): -325.11.
+Step 1354 (17 ms): -305.78.
+Step 1391 (18 ms): -320.17.
+Step 1429 (18 ms): -339.95.
+Step 1466 (18 ms): -308.31.
+Step 1504 (10 ms): -249.37.
+
+Epoch 4 (6.69 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -332.03, ENRE: -316.86, KL: 15.176.
+    Saving model parameters.
+    Model parameters saved (55 ms).
+
+Step 1542 (18 ms): -300.95.
+Step 1579 (18 ms): -274.35.
+Step 1617 (18 ms): -274.43.
+Step 1654 (18 ms): -301.07.
+Step 1692 (18 ms): -295.4.
+Step 1730 (18 ms): -302.8.
+Step 1767 (18 ms): -277.62.
+Step 1805 (18 ms): -293.51.
+Step 1842 (18 ms): -256.79.
+Step 1880 (10 ms): -250.34.
+
+Epoch 5 (6.72 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -289.1, ENRE: -276.21, KL: 12.893.
+    Saving model parameters.
+    Model parameters saved (55 ms).
+
+Step 1918 (18 ms): -254.58.
+Step 1955 (18 ms): -250.43.
+Step 1993 (18 ms): -258.03.
+Step 2030 (18 ms): -253.8.
+Step 2068 (18 ms): -257.17.
+Step 2106 (18 ms): -260.99.
+Step 2143 (18 ms): -299.73.
+Step 2181 (18 ms): -245.36.
+Step 2218 (17 ms): -254.93.
+Step 2256 (8 ms): -467.26.
+
+Epoch 6 (6.69 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -263.97, ENRE: -252.32, KL: 11.646.
+    Saving model parameters.
+    Model parameters saved (51 ms).
+
+Step 2294 (18 ms): -240.51.
+Step 2331 (18 ms): -249.73.
+Step 2369 (18 ms): -250.98.
+Step 2406 (18 ms): -257.95.
+Step 2444 (18 ms): -252.58.
+Step 2482 (18 ms): -246.89.
+Step 2519 (18 ms): -245.72.
+Step 2557 (18 ms): -242.97.
+Step 2594 (18 ms): -245.69.
+Step 2632 (10 ms): -322.03.
+
+Epoch 7 (6.73 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -249.79, ENRE: -238.79, KL: 10.992.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 2670 (18 ms): -224.79.
+Step 2707 (18 ms): -249.94.
+Step 2745 (18 ms): -250.21.
+Step 2782 (18 ms): -239.69.
+Step 2820 (18 ms): -227.19.
+Step 2858 (18 ms): -293.09.
+Step 2895 (18 ms): -223.79.
+Step 2933 (18 ms): -238.18.
+Step 2970 (18 ms): -234.
+Step 3008 (9 ms): -321.16.
+
+Epoch 8 (6.71 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -241.64, ENRE: -231.01, KL: 10.632.
+    Saving model parameters.
+    Model parameters saved (55 ms).
+
+Step 3046 (18 ms): -232.08.
+Step 3083 (18 ms): -238.96.
+Step 3121 (18 ms): -220.49.
+Step 3158 (18 ms): -243.11.
+Step 3196 (18 ms): -236.37.
+Step 3234 (18 ms): -230.63.
+Step 3271 (19 ms): -228.14.
+Step 3309 (18 ms): -222.16.
+Step 3346 (18 ms): -229.79.
+Step 3384 (8 ms): -214.22.
+
+Epoch 9 (6.73 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -235.81, ENRE: -225.33, KL: 10.483.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 3422 (18 ms): -227.82.
+Step 3459 (18 ms): -242.17.
+Step 3497 (18 ms): -217.65.
+Step 3534 (18 ms): -251.63.
+Step 3572 (18 ms): -229.44.
+Step 3610 (18 ms): -224.78.
+Step 3647 (18 ms): -238.74.
+Step 3685 (18 ms): -262.3.
+Step 3722 (18 ms): -252.82.
+Step 3760 (10 ms): -426.32.
+
+Epoch 10 (6.69 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -231.06, ENRE: -221.08, KL: 9.9751.
+    Saving model parameters.
+    Model parameters saved (54 ms).
+
+Step 3798 (18 ms): -226.33.
+Step 3835 (18 ms): -218.61.
+Step 3873 (18 ms): -234.63.
+Step 3910 (18 ms): -239.16.
+Step 3948 (18 ms): -225.5.
+Step 3986 (18 ms): -210.16.
+Step 4023 (18 ms): -216.41.
+Step 4061 (18 ms): -221.84.
+Step 4098 (18 ms): -225.54.
+Step 4136 (8 ms): -189.82.
+
+Epoch 11 (6.72 s):
+    Evaluating model.
+    Full set (3.76 s): ELBO: -228.06, ENRE: -218.12, KL: 9.9416.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 4174 (18 ms): -226.17.
+Step 4211 (18 ms): -224.89.
+Step 4249 (18 ms): -221.79.
+Step 4286 (18 ms): -209.1.
+Step 4324 (18 ms): -233.95.
+Step 4362 (18 ms): -226.07.
+Step 4399 (18 ms): -226.62.
+Step 4437 (18 ms): -268.4.
+Step 4474 (18 ms): -225.16.
+Step 4512 (10 ms): -208.54.
+
+Epoch 12 (6.7 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -224.99, ENRE: -215.35, KL: 9.6405.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 4550 (18 ms): -221.16.
+Step 4587 (18 ms): -215.36.
+Step 4625 (18 ms): -223.46.
+Step 4662 (18 ms): -228.3.
+Step 4700 (18 ms): -223.75.
+Step 4738 (18 ms): -233.67.
+Step 4775 (18 ms): -232.77.
+Step 4813 (18 ms): -235.47.
+Step 4850 (18 ms): -210.7.
+Step 4888 (10 ms): -210.76.
+
+Epoch 13 (6.73 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -222.88, ENRE: -213.33, KL: 9.5491.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 4926 (18 ms): -206.97.
+Step 4963 (18 ms): -211.83.
+Step 5001 (18 ms): -214.87.
+Step 5038 (18 ms): -231.2.
+Step 5076 (18 ms): -224.48.
+Step 5114 (18 ms): -237.88.
+Step 5151 (18 ms): -220.69.
+Step 5189 (18 ms): -217.47.
+Step 5226 (18 ms): -217.74.
+Step 5264 (8 ms): -395.7.
+
+Epoch 14 (6.69 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -221.17, ENRE: -211.69, KL: 9.4786.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 5302 (18 ms): -222.91.
+Step 5339 (18 ms): -210.55.
+Step 5377 (18 ms): -218.77.
+Step 5414 (18 ms): -247.19.
+Step 5452 (18 ms): -218.78.
+Step 5490 (18 ms): -227.1.
+Step 5527 (18 ms): -207.9.
+Step 5565 (18 ms): -215.62.
+Step 5602 (18 ms): -212.2.
+Step 5640 (8 ms): -182.4.
+
+Epoch 15 (6.72 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -219.79, ENRE: -210.58, KL: 9.2134.
+    Saving model parameters.
+    Model parameters saved (55 ms).
+
+Step 5678 (18 ms): -214.94.
+Step 5715 (18 ms): -199.24.
+Step 5753 (18 ms): -231.49.
+Step 5790 (18 ms): -232.25.
+Step 5828 (18 ms): -205.02.
+Step 5866 (18 ms): -204.22.
+Step 5903 (18 ms): -225.04.
+Step 5941 (18 ms): -213.4.
+Step 5978 (18 ms): -212.25.
+Step 6016 (8 ms): -204.12.
+
+Epoch 16 (6.69 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -218.48, ENRE: -209.11, KL: 9.3669.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 6054 (18 ms): -237.83.
+Step 6091 (18 ms): -228.76.
+Step 6129 (18 ms): -212.36.
+Step 6166 (18 ms): -216.06.
+Step 6204 (18 ms): -206.43.
+Step 6242 (18 ms): -211.
+Step 6279 (18 ms): -219.78.
+Step 6317 (18 ms): -209.98.
+Step 6354 (18 ms): -222.89.
+Step 6392 (8 ms): -197.91.
+
+Epoch 17 (6.72 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -217.5, ENRE: -207.98, KL: 9.5201.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 6430 (18 ms): -230.64.
+Step 6467 (18 ms): -219.95.
+Step 6505 (18 ms): -210.52.
+Step 6542 (18 ms): -229.06.
+Step 6580 (18 ms): -220.22.
+Step 6618 (18 ms): -207.93.
+Step 6655 (18 ms): -204.54.
+Step 6693 (18 ms): -206.86.
+Step 6730 (18 ms): -235.29.
+Step 6768 (8 ms): -216.36.
+
+Epoch 18 (6.69 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -216.44, ENRE: -207.22, KL: 9.2242.
+    Saving model parameters.
+    Model parameters saved (55 ms).
+
+Step 6806 (18 ms): -224.42.
+Step 6843 (18 ms): -218.45.
+Step 6881 (18 ms): -206.42.
+Step 6918 (18 ms): -220.
+Step 6956 (18 ms): -220.76.
+Step 6994 (18 ms): -219.37.
+Step 7031 (18 ms): -199.82.
+Step 7069 (18 ms): -221.95.
+Step 7106 (18 ms): -221.94.
+Step 7144 (8 ms): -267.27.
+
+Epoch 19 (6.72 s):
+    Evaluating model.
+    Full set (3.76 s): ELBO: -215.53, ENRE: -206.2, KL: 9.3343.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 7182 (18 ms): -235.11.
+Step 7219 (18 ms): -208.04.
+Step 7257 (18 ms): -219.23.
+Step 7294 (18 ms): -215.23.
+Step 7332 (18 ms): -216.23.
+Step 7370 (18 ms): -230.21.
+Step 7407 (18 ms): -201.07.
+Step 7445 (18 ms): -205.93.
+Step 7482 (18 ms): -207.34.
+Step 7520 (10 ms): -225.09.
+
+Epoch 20 (6.69 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -214.73, ENRE: -205.62, KL: 9.116.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 7558 (18 ms): -207.02.
+Step 7595 (18 ms): -198.62.
+Step 7633 (18 ms): -206.87.
+Step 7670 (18 ms): -219.5.
+Step 7708 (18 ms): -205.58.
+Step 7746 (18 ms): -215.49.
+Step 7783 (18 ms): -220.29.
+Step 7821 (18 ms): -213.59.
+Step 7858 (18 ms): -219.05.
+Step 7896 (8 ms): -192.22.
+
+Epoch 21 (6.74 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -214.03, ENRE: -204.84, KL: 9.197.
+    Saving model parameters.
+    Model parameters saved (54 ms).
+
+Step 7934 (18 ms): -214.79.
+Step 7971 (18 ms): -202.55.
+Step 8009 (18 ms): -217.63.
+Step 8046 (18 ms): -210.58.
+Step 8084 (18 ms): -227.35.
+Step 8122 (18 ms): -205.55.
+Step 8159 (18 ms): -225.79.
+Step 8197 (18 ms): -222.85.
+Step 8234 (18 ms): -207.83.
+Step 8272 (8 ms): -245.39.
+
+Epoch 22 (6.7 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -213.32, ENRE: -204.35, KL: 8.9729.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 8310 (18 ms): -201.18.
+Step 8347 (18 ms): -203.46.
+Step 8385 (18 ms): -226.38.
+Step 8422 (18 ms): -206.74.
+Step 8460 (18 ms): -206.18.
+Step 8498 (18 ms): -207.13.
+Step 8535 (18 ms): -219.94.
+Step 8573 (18 ms): -196.35.
+Step 8610 (18 ms): -213.98.
+Step 8648 (8 ms): -240.
+
+Epoch 23 (6.72 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -213.05, ENRE: -204.07, KL: 8.9724.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 8686 (18 ms): -211.97.
+Step 8723 (18 ms): -236.9.
+Step 8761 (18 ms): -224.05.
+Step 8798 (18 ms): -218.34.
+Step 8836 (18 ms): -213.71.
+Step 8874 (18 ms): -218.42.
+Step 8911 (18 ms): -208.92.
+Step 8949 (18 ms): -204.71.
+Step 8986 (18 ms): -204.17.
+Step 9024 (10 ms): -452.03.
+
+Epoch 24 (6.71 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -212.27, ENRE: -203.4, KL: 8.8717.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 9062 (18 ms): -205.86.
+Step 9099 (18 ms): -211.72.
+Step 9137 (18 ms): -227.44.
+Step 9174 (18 ms): -212.15.
+Step 9212 (18 ms): -212.8.
+Step 9250 (18 ms): -198.97.
+Step 9287 (18 ms): -204.94.
+Step 9325 (18 ms): -211.98.
+Step 9362 (18 ms): -210.26.
+Step 9400 (8 ms): -228.1.
+
+Epoch 25 (6.72 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -211.93, ENRE: -203.11, KL: 8.8263.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 9438 (18 ms): -192.34.
+Step 9475 (18 ms): -205.35.
+Step 9513 (18 ms): -210.44.
+Step 9550 (19 ms): -206.99.
+Step 9588 (18 ms): -220.21.
+Step 9626 (18 ms): -204.65.
+Step 9663 (18 ms): -207.15.
+Step 9701 (18 ms): -218.75.
+Step 9738 (18 ms): -206.29.
+Step 9776 (10 ms): -231.55.
+
+Epoch 26 (6.7 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -211.53, ENRE: -202.79, KL: 8.7471.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 9814 (18 ms): -209.59.
+Step 9851 (18 ms): -209.22.
+Step 9889 (18 ms): -216.38.
+Step 9926 (18 ms): -223.56.
+Step 9964 (18 ms): -202.23.
+Step 10002 (18 ms): -223.63.
+Step 10039 (18 ms): -206.44.
+Step 10077 (18 ms): -210.08.
+Step 10114 (18 ms): -220.64.
+Step 10152 (8 ms): -194.57.
+
+Epoch 27 (6.73 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -210.76, ENRE: -201.81, KL: 8.953.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 10190 (18 ms): -216.56.
+Step 10227 (18 ms): -209.72.
+Step 10265 (18 ms): -228.18.
+Step 10302 (18 ms): -209.07.
+Step 10340 (18 ms): -221.08.
+Step 10378 (18 ms): -209.8.
+Step 10415 (18 ms): -200.19.
+Step 10453 (18 ms): -215.3.
+Step 10490 (18 ms): -209.06.
+Step 10528 (8 ms): -230.2.
+
+Epoch 28 (6.7 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -210.32, ENRE: -201.43, KL: 8.8847.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 10566 (18 ms): -216.37.
+Step 10603 (18 ms): -217.02.
+Step 10641 (18 ms): -198.26.
+Step 10678 (18 ms): -205.92.
+Step 10716 (18 ms): -231.15.
+Step 10754 (18 ms): -213.15.
+Step 10791 (18 ms): -206.09.
+Step 10829 (18 ms): -206.82.
+Step 10866 (18 ms): -231.14.
+Step 10904 (8 ms): -217.93.
+
+Epoch 29 (6.73 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -210.03, ENRE: -201.17, KL: 8.8611.
+    Saving model parameters.
+    Model parameters saved (55 ms).
+
+Step 10942 (18 ms): -202.03.
+Step 10979 (18 ms): -204.47.
+Step 11017 (18 ms): -213.03.
+Step 11054 (18 ms): -210.22.
+Step 11092 (18 ms): -203.09.
+Step 11130 (18 ms): -200.41.
+Step 11167 (18 ms): -205.04.
+Step 11205 (18 ms): -202.74.
+Step 11242 (18 ms): -196.34.
+Step 11280 (9 ms): -216.5.
+
+Epoch 30 (6.7 s):
+    Evaluating model.
+    Full set (3.83 s): ELBO: -209.63, ENRE: -200.69, KL: 8.9456.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 11318 (18 ms): -214.71.
+Step 11355 (18 ms): -197.88.
+Step 11393 (18 ms): -214.48.
+Step 11430 (18 ms): -216.
+Step 11468 (18 ms): -199.65.
+Step 11506 (18 ms): -215.74.
+Step 11543 (18 ms): -199.29.
+Step 11581 (18 ms): -210.56.
+Step 11618 (18 ms): -224.33.
+Step 11656 (8 ms): -202.15.
+
+Epoch 31 (6.73 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -209.33, ENRE: -200.57, KL: 8.7685.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 11694 (18 ms): -201.11.
+Step 11731 (18 ms): -214.18.
+Step 11769 (18 ms): -206.37.
+Step 11806 (18 ms): -204.66.
+Step 11844 (18 ms): -194.29.
+Step 11882 (18 ms): -212.77.
+Step 11919 (18 ms): -208.3.
+Step 11957 (18 ms): -202.58.
+Step 11994 (18 ms): -209.87.
+Step 12032 (8 ms): -199.28.
+
+Epoch 32 (6.69 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -209.07, ENRE: -200.35, KL: 8.7177.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 12070 (18 ms): -203.17.
+Step 12107 (18 ms): -201.84.
+Step 12145 (18 ms): -189.09.
+Step 12182 (18 ms): -214.95.
+Step 12220 (18 ms): -205.85.
+Step 12258 (18 ms): -197.2.
+Step 12295 (18 ms): -204.37.
+Step 12333 (18 ms): -197.27.
+Step 12370 (18 ms): -195.13.
+Step 12408 (10 ms): -225.42.
+
+Epoch 33 (6.73 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -208.73, ENRE: -200.05, KL: 8.6822.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 12446 (18 ms): -220.29.
+Step 12483 (18 ms): -220.43.
+Step 12521 (18 ms): -198.99.
+Step 12558 (18 ms): -218.79.
+Step 12596 (18 ms): -201.49.
+Step 12634 (18 ms): -201.23.
+Step 12671 (18 ms): -191.45.
+Step 12709 (18 ms): -211.4.
+Step 12746 (18 ms): -200.23.
+Step 12784 (8 ms): -220.61.
+
+Epoch 34 (6.69 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -208.58, ENRE: -199.94, KL: 8.645.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 12822 (18 ms): -215.52.
+Step 12859 (18 ms): -206.27.
+Step 12897 (18 ms): -210.78.
+Step 12934 (18 ms): -210.12.
+Step 12972 (18 ms): -219.64.
+Step 13010 (18 ms): -209.54.
+Step 13047 (18 ms): -201.12.
+Step 13085 (18 ms): -218.79.
+Step 13122 (18 ms): -206.11.
+Step 13160 (9 ms): -214.83.
+
+Epoch 35 (6.73 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -208.27, ENRE: -199.48, KL: 8.7907.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 13198 (18 ms): -201.76.
+Step 13235 (18 ms): -205.05.
+Step 13273 (18 ms): -200.44.
+Step 13310 (18 ms): -210.33.
+Step 13348 (18 ms): -200.02.
+Step 13386 (18 ms): -216.56.
+Step 13423 (18 ms): -214.14.
+Step 13461 (18 ms): -201.46.
+Step 13498 (18 ms): -190.22.
+Step 13536 (8 ms): -201.93.
+
+Epoch 36 (6.7 s):
+    Evaluating model.
+    Full set (3.83 s): ELBO: -208.05, ENRE: -199.22, KL: 8.8284.
+    Saving model parameters.
+    Model parameters saved (55 ms).
+
+Step 13574 (18 ms): -208.98.
+Step 13611 (18 ms): -207.11.
+Step 13649 (18 ms): -218.76.
+Step 13686 (18 ms): -203.37.
+Step 13724 (18 ms): -221.87.
+Step 13762 (18 ms): -207.98.
+Step 13799 (18 ms): -204.69.
+Step 13837 (18 ms): -217.29.
+Step 13874 (18 ms): -220.69.
+Step 13912 (8 ms): -205.25.
+
+Epoch 37 (6.73 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -207.99, ENRE: -199.25, KL: 8.742.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 13950 (18 ms): -211.31.
+Step 13987 (18 ms): -219.26.
+Step 14025 (18 ms): -196.08.
+Step 14062 (18 ms): -203.89.
+Step 14100 (18 ms): -192.89.
+Step 14138 (18 ms): -211.06.
+Step 14175 (18 ms): -208.25.
+Step 14213 (18 ms): -203.43.
+Step 14250 (18 ms): -209.99.
+Step 14288 (8 ms): -196.78.
+
+Epoch 38 (6.73 s):
+    Evaluating model.
+    Full set (3.83 s): ELBO: -207.81, ENRE: -199.12, KL: 8.6845.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 14326 (18 ms): -211.63.
+Step 14363 (18 ms): -197.85.
+Step 14401 (18 ms): -212.23.
+Step 14438 (18 ms): -220.24.
+Step 14476 (18 ms): -200.33.
+Step 14514 (18 ms): -210.99.
+Step 14551 (18 ms): -201.01.
+Step 14589 (18 ms): -212.11.
+Step 14626 (18 ms): -212.16.
+Step 14664 (10 ms): -178.98.
+
+Epoch 39 (6.74 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -207.44, ENRE: -198.72, KL: 8.7218.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 14702 (18 ms): -213.74.
+Step 14739 (18 ms): -200.4.
+Step 14777 (18 ms): -204.47.
+Step 14814 (18 ms): -211.43.
+Step 14852 (18 ms): -205.53.
+Step 14890 (18 ms): -207.79.
+Step 14927 (18 ms): -215.29.
+Step 14965 (18 ms): -195.33.
+Step 15002 (18 ms): -202.9.
+Step 15040 (10 ms): -216.03.
+
+Epoch 40 (6.7 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -207.18, ENRE: -198.46, KL: 8.7167.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 15078 (18 ms): -208.79.
+Step 15115 (18 ms): -203.81.
+Step 15153 (18 ms): -205.31.
+Step 15190 (18 ms): -212.61.
+Step 15228 (18 ms): -204.05.
+Step 15266 (18 ms): -219.19.
+Step 15303 (18 ms): -209.67.
+Step 15341 (18 ms): -196.81.
+Step 15378 (18 ms): -205.62.
+Step 15416 (8 ms): -183.39.
+
+Epoch 41 (6.75 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -207.03, ENRE: -198.41, KL: 8.6199.
+    Saving model parameters.
+    Model parameters saved (54 ms).
+
+Step 15454 (18 ms): -209.02.
+Step 15491 (18 ms): -211.14.
+Step 15529 (18 ms): -209.5.
+Step 15566 (18 ms): -214.93.
+Step 15604 (18 ms): -204.57.
+Step 15642 (18 ms): -200.98.
+Step 15679 (18 ms): -197.4.
+Step 15717 (18 ms): -215.25.
+Step 15754 (18 ms): -204.85.
+Step 15792 (10 ms): -220.01.
+
+Epoch 42 (6.71 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -207.02, ENRE: -198.32, KL: 8.6958.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 15830 (18 ms): -211.27.
+Step 15867 (18 ms): -212.11.
+Step 15905 (18 ms): -219.16.
+Step 15942 (18 ms): -224.61.
+Step 15980 (18 ms): -202.75.
+Step 16018 (18 ms): -200.53.
+Step 16055 (18 ms): -204.06.
+Step 16093 (18 ms): -210.56.
+Step 16130 (18 ms): -199.57.
+Step 16168 (9 ms): -197.55.
+
+Epoch 43 (6.73 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -206.78, ENRE: -198.18, KL: 8.5972.
+    Saving model parameters.
+    Model parameters saved (54 ms).
+
+Step 16206 (18 ms): -201.96.
+Step 16243 (18 ms): -194.04.
+Step 16281 (18 ms): -191.97.
+Step 16318 (18 ms): -226.09.
+Step 16356 (18 ms): -202.21.
+Step 16394 (18 ms): -198.85.
+Step 16431 (18 ms): -207.36.
+Step 16469 (18 ms): -204.17.
+Step 16506 (18 ms): -208.24.
+Step 16544 (9 ms): -231.87.
+
+Epoch 44 (6.7 s):
+    Evaluating model.
+    Full set (3.83 s): ELBO: -206.68, ENRE: -198.03, KL: 8.6458.
+    Saving model parameters.
+    Model parameters saved (56 ms).
+
+Step 16582 (18 ms): -210.38.
+Step 16619 (18 ms): -216.71.
+Step 16657 (18 ms): -194.96.
+Step 16694 (18 ms): -202.81.
+Step 16732 (18 ms): -205.54.
+Step 16770 (18 ms): -198.85.
+Step 16807 (18 ms): -203.52.
+Step 16845 (18 ms): -199.34.
+Step 16882 (18 ms): -206.75.
+Step 16920 (8 ms): -262.12.
+
+Epoch 45 (6.73 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -206.48, ENRE: -197.72, KL: 8.7577.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 16958 (18 ms): -214.09.
+Step 16995 (18 ms): -205.45.
+Step 17033 (18 ms): -215.47.
+Step 17070 (18 ms): -210.35.
+Step 17108 (18 ms): -219.29.
+Step 17146 (18 ms): -210.12.
+Step 17183 (18 ms): -207.11.
+Step 17221 (18 ms): -193.14.
+Step 17258 (18 ms): -198.75.
+Step 17296 (10 ms): -197.39.
+
+Epoch 46 (6.71 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -206.62, ENRE: -198.06, KL: 8.5513.
+    Saving model parameters.
+    Model parameters saved (54 ms).
+
+Step 17334 (18 ms): -202.76.
+Step 17371 (18 ms): -215.16.
+Step 17409 (18 ms): -193.37.
+Step 17446 (18 ms): -216.02.
+Step 17484 (18 ms): -197.04.
+Step 17522 (18 ms): -198.82.
+Step 17559 (18 ms): -203.12.
+Step 17597 (18 ms): -196.31.
+Step 17634 (18 ms): -208.98.
+Step 17672 (10 ms): -280.66.
+
+Epoch 47 (6.73 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -206.13, ENRE: -197.54, KL: 8.5904.
+    Saving model parameters.
+    Model parameters saved (53 ms).
+
+Step 17710 (18 ms): -207.77.
+Step 17747 (18 ms): -209.93.
+Step 17785 (18 ms): -204.8.
+Step 17822 (18 ms): -213.22.
+Step 17860 (18 ms): -199.05.
+Step 17898 (18 ms): -203.66.
+Step 17935 (18 ms): -209.47.
+Step 17973 (18 ms): -201.33.
+Step 18010 (18 ms): -201.67.
+Step 18048 (9 ms): -220.15.
+
+Epoch 48 (6.7 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -205.97, ENRE: -197.1, KL: 8.8702.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 18086 (18 ms): -208.56.
+Step 18123 (18 ms): -212.48.
+Step 18161 (18 ms): -206.51.
+Step 18198 (18 ms): -206.8.
+Step 18236 (18 ms): -208.99.
+Step 18274 (18 ms): -206.12.
+Step 18311 (18 ms): -200.26.
+Step 18349 (18 ms): -193.63.
+Step 18386 (18 ms): -210.52.
+Step 18424 (8 ms): -192.19.
+
+Epoch 49 (6.73 s):
+    Evaluating model.
+    Full set (3.77 s): ELBO: -205.82, ENRE: -197.2, KL: 8.6157.
+    Saving model parameters.
+    Model parameters saved (52 ms).
+
+Step 18462 (18 ms): -214.
+Step 18499 (18 ms): -200.08.
+Step 18537 (18 ms): -197.6.
+Step 18574 (18 ms): -206.18.
+Step 18612 (18 ms): -214.46.
+Step 18650 (18 ms): -204.86.
+Step 18687 (18 ms): -212.56.
+Step 18725 (18 ms): -203.69.
+Step 18762 (18 ms): -215.24.
+Step 18800 (8 ms): -340.3.
+
+Epoch 50 (6.72 s):
+    Evaluating model.
+    Full set (3.82 s): ELBO: -205.83, ENRE: -197.14, KL: 8.6858.
+    Saving model parameters.
+    Model parameters saved (54 ms).
+
+Model trained for 50 epochs (8m 51s).
+
+Data
+════
+
+Data Format: mtx_fbe
+before commented code in data/data_set.py
+self.preprocessed_values is defined
+Copying values for full set.
+Data set copied (9 ms).
+
+Loading original data set.
+Num of cells = 10286 | Num of genes = 2000
+Original data set loaded (820 ms).
+
+Converting data set value array to sparse matrix.
+Data set value array converted (249 ms).
+
+Model
+═════
+
+Analysis
+────────
+
+Results
+═══════
+
+Evaluation set: full set.
+Model version: end of training.
+
+End of training
+───────────────
+
+End-of-training evaluation
+--------------------------
+
+Evaluating trained model on original values.
+    Full set (1.11 s):  ELBO: -212.81, ENRE: -203.94, KL: 8.8727.
+
+End-of-training sampling
+------------------------
+
+sample size in sample method: 10286
+Sampling 10286 examples from model.
+Examples sampled (325 ms).
+
+test labels shape: (10286, 2000)
+test preds shape: (10286, 2000)
+save dir: /users/srajakum/scratch/Structure_VAE_scRNA_Simulator/baseline_results/scVAE/PBMC/2023-05-11-at-12-01-00_ttp_0_tuned
+dir exists? True
+KS performance (sum): 2.407 
+
+                  KS    p
+mean_gene      0.084  0.0
+var_gene       0.614  0.0
+mean_var_gene  0.986  0.0
+mean_cell      0.145  0.0
+var_cell       0.273  0.0
+mean_var_cell  0.306  0.0
+Test PCC: 0.998735496585292
+Test SCC: 0.958679461759492
+finished saving

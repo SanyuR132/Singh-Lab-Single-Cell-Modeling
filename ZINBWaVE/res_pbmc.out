@@ -1,0 +1,67 @@
+## SLURM PROLOG ###############################################################
+##    Job ID : 9898694
+##  Job Name : zinbwave_pbmc
+##  Nodelist : gpu2007
+##      CPUs : 
+##  Mem/Node : 30720 MB
+## Directory : /gpfs/scratch/srajakum/Structure_VAE_scRNA_Simulator/Models/ZINBWaVE
+##   Job Started : Wed May 10 20:44:18 EDT 2023
+###############################################################################
+[1] "\nDesription:\n  Experiment with ZINB-WaVE method.\n\n\nAuthor:\n  Jiaqi Zhang\n"
+[1] "Filename : /users/srajakum/scratch/Structure_VAE_scRNA_Simulator/Data/PBMC/upto_tp0/train_data.mtx"
+[1] "Num of cells : 48005"
+[1] "Num of genes : 2000"
+[1] "Filename : /users/srajakum/scratch/Structure_VAE_scRNA_Simulator/Data/PBMC/upto_tp0/test_data.mtx"
+[1] "Num of cells : 10286"
+[1] "Num of genes : 2000"
+[1] "Number of genes kept only in training data: 1997"
+[1] "Number of genes kept only in testing data: 1832"
+[1] "Number of genes kept overall: 1830"
+[1] "Before filtering: "
+[1] "training data dim 2000"  "training data dim 48005"
+[1] "testing data dim 2000"  "testing data dim 10286"
+[1] "remaining zero-count genes in train and test: "
+integer(0)
+integer(0)
+[1] "After filtering :"
+[1] "train data shape: 1830 x 48005"
+[1] "test data shape: 1830 x 10286"
+[1] "Warnings in training: "
+[1] "Started Model Fitting"
+    user   system  elapsed 
+ 617.632  255.541 1323.845 
+    user   system  elapsed 
+ 776.399    6.079 1177.350 
+   user  system elapsed 
+446.835 181.554 946.882 
+    user   system  elapsed 
+ 782.337    6.286 1185.981 
+   user  system elapsed 
+421.812 171.771 896.700 
+    user   system  elapsed 
+ 770.212    6.718 1168.953 
+   user  system elapsed 
+393.010 161.438 838.081 
+    user   system  elapsed 
+ 764.962    5.866 1160.858 
+   user  system elapsed 
+387.377 157.012 823.744 
+    user   system  elapsed 
+ 755.833    6.748 1153.064 
+   user  system elapsed 
+371.157 150.394 800.054 
+    user   system  elapsed 
+ 744.626    6.689 1136.010 
+[1] "Finished fitting and saving"
+[1] "Warnings in predicting: "
+[1] "Started Predicting"
+[1] "Finished predicting"
+[1] "predictions shape : 1830 x 10286"
+                      ks
+mean_gene     0.06612022
+var_gene      0.06612022
+mean_var_gene 0.12513661
+mean_cell     0.02255493
+var_cell      0.12337157
+mean_var_cell 0.16187050
+[1] "Finished saving."
