@@ -95,7 +95,10 @@ normalAugmentation <- function() {
   print('Finished predicting')
   print(sprintf("predictions shape : %s x %s", dim(predictions)[1], dim(predictions)[2]))
 
+  # compute marginal KS statistics
+
   test_data = filteredTestData
+
   mean_cell_labels = colMeans(test_data)
   mean_cell_predictions = colMeans(predictions)
   mean_cell_ks = ks.test(mean_cell_predictions, mean_cell_labels)$statistic
@@ -122,6 +125,7 @@ normalAugmentation <- function() {
   mean_var_gene_ks = ks.test(mean_var_gene_predictions, mean_var_gene_labels)$statistic
 
   ks_df = data.frame('ks' = c(mean_gene_ks, var_gene_ks, mean_var_gene_ks, mean_cell_ks, var_cell_ks, mean_var_cell_ks), row.names = c('mean_gene', 'var_gene', 'mean_var_gene', 'mean_cell', 'var_cell', 'mean_var_cell'))
+  write.csv(ks_df, file=paste(save_dir, "ks_stats.csv", sep='/'))
 
   # plot histograms from each stat
   num_bins = 50
@@ -143,12 +147,15 @@ normalAugmentation <- function() {
   ks_plots = ggarange(mean_gene_hist, var_gene_hist, mean_var_gene_hist, mean_cell_hist, var_cell_hist, mean_var_cell_hist, labels = rownames(ks_df), ncol = 3, nrow=2)
   ggsave(paste(save_dir, 'ks_plots.png', sep='/'))
 
+  # compute Pearson and Spearman correlations
   pcc = cor(mean_gene_labels, mean_gene_predictions, method = 'pearson')
   scc = cor(mean_gene_labels, mean_gene_predictions, method = 'spearman')
-  cc_plot = plot(mean_gene_labels, mean_gene_predictions, xlab='mean gene labels', ylab='mean gene predictions', col='blue', )
+  cc_plot = plot(mean_gene_labels, mean_gene_predictions, xlab='mean gene labels', ylab='mean gene predictions', col='blue')
+  text(0.65, 0.25, paste('PCC = ', pcc , "\n", "SCC = ", scc))
+
   ggsave(paste(save_dir, 'cc_plot.png', sep='/'))
 
-  # no longer saving predictions to decrease disk usage     
+  # no longer saving predictions since they take up too much space    
   # writeMM(as(predictions, "sparseMatrix"), file = paste(save_dir, 'WOT-ZINBWaVE_estimation.mtx', sep = '/'))
   print("Finished saving.")
 

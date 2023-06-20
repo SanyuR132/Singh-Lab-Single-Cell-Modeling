@@ -576,9 +576,9 @@ def plot_cc_metrics(test_preds, test_labels, test_prev=np.array([])):
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-lhsdt", type=str)
-parser.add_argument("-ttp", type=int)
-parser.add_argument("-stu", type=str)
+parser.add_argument("-lhsdt", "--load_hyper_struct_date_and_time", type=str)
+parser.add_argument("-ttp", '--truncate_time_point', type=int)
+parser.add_argument("-stu", '--study', type=str)
 parser.add_argument("--data_dir", type=str)
 parser.add_argument("--save_dir", type=str)
 parser.add_argument("--hyperparameters_dir", type=str)
@@ -703,7 +703,7 @@ cc_plot.savefig(os.path.join(save_dir, "cc_plots.png"))
 
 with open(os.path.join(save_dir, "info.txt"), "w") as f:
     f.write("Model reference date and time: " + date_and_time + "\n")
-    f.write("\n\n")
+    f.write("\n")
     f.write("Truncated time point (included in training): " + str(args.ttp) + "\n")
     f.write(f"Tuned?: {bool(args.lhsdt)}" + "\n")
     if args.lhsdt:

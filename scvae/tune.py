@@ -39,13 +39,15 @@ import shutil
 parser = argparse.ArgumentParser()
 
 parser.add_argument(
-    "-stu", default="WOT", type=str, help="Which dataset to use",
+    "-stu", "--study", default="WOT", type=str, help="Which dataset to use",
 )
-parser.add_argument("-ttp", type=int)
+parser.add_argument("-ttp", "--truncate_time_point", type=int)
 parser.add_argument(
     "-s", default="KS", type=str,
 )
-parser.add_argument("-n", default=200, type=int, help="The number of trials.")
+parser.add_argument(
+    "-n", "--num_trials", default=200, type=int, help="The number of trials."
+)
 parser.add_argument(
     "-tuti", "--tuning_time", type=int, help="Number of minutes to tune for"
 )
@@ -72,29 +74,56 @@ parser.add_argument("--data_dir", type=str)
 args = parser.parse_args()
 
 
-def calc_ks(test_preds, test_labels, stat_type):
-    if stat_type == "mean_gene":
-        axis_along = 0
-        stat_test_preds = np.mean(test_preds, axis=axis_along)
-        stat_test_labels = np.mean(test_labels, axis=axis_along)
-    elif stat_type == "var_gene":
-        axis_along = 0
-        stat_test_preds = np.var(test_preds, axis=axis_along)
-        stat_test_labels = np.var(test_labels, axis=axis_along)
-    elif stat_type == "mean_cell":
-        axis_along = 1
-        stat_test_preds = np.mean(test_preds, axis=axis_along)
-        stat_test_labels = np.mean(test_labels, axis=axis_along)
-    elif stat_type == "var_cell":
-        axis_along = 1
-        stat_test_preds = np.var(test_preds, axis=axis_along)
-        stat_test_labels = np.var(test_labels, axis=axis_along)
+def calc_ks(test_preds, test_labels):
+    eps = 1e-6
+    stats_list = [
+        "mean_gene",
+        "var_gene",
+        "mean_var_gene",
+        "mean_cell",
+        "var_cell",
+        "mean_var_cell",
+    ]
+    ks_total = 0
 
-    stat_test_labels = np.squeeze(stat_test_labels)
+    for stat_type in stats_list:
+        if stat_type == "mean_gene":
+            axis_along = 0
+            stat_test_preds = np.mean(test_preds, axis=axis_along)
+            stat_test_labels = np.mean(test_labels, axis=axis_along)
+        elif stat_type == "var_gene":
+            axis_along = 0
+            stat_test_preds = np.var(test_preds, axis=axis_along)
+            stat_test_labels = np.var(test_labels, axis=axis_along)
+        elif stat_type == "mean_var_gene":
+            axis_along = 0
+            stat_test_preds = np.mean(test_preds, axis=axis_along) / (
+                np.var(test_preds, axis=axis_along) + eps
+            )
+            stat_test_labels = np.mean(test_labels, axis=axis_along) / (
+                np.var(test_labels, axis=axis_along) + eps
+            )
+        elif stat_type == "mean_cell":
+            axis_along = 1
+            stat_test_preds = np.mean(test_preds, axis=axis_along)
+            stat_test_labels = np.mean(test_labels, axis=axis_along)
+        elif stat_type == "var_cell":
+            axis_along = 1
+            stat_test_preds = np.var(test_preds, axis=axis_along)
+            stat_test_labels = np.var(test_labels, axis=axis_along)
+        elif stat_type == "mean_var_cell":
+            axis_along = 1
+            stat_test_preds = np.mean(test_preds, axis=axis_along) / (
+                np.var(test_preds, axis=axis_along) + eps
+            )
+            stat_test_labels = np.mean(test_labels, axis=axis_along) / (
+                np.var(test_labels, axis=axis_along) + eps
+            )
 
-    ks_dist, _ = ks_2samp(stat_test_preds, stat_test_labels)
+        stat_test_labels = np.squeeze(stat_test_labels)
+        ks_total += ks_2samp(stat_test_preds, stat_test_labels)
 
-    return ks_dist
+    return ks_total
 
 
 # https://scvae.readthedocs.io/en/latest/ (tuned parameters found under "Training a model")
@@ -171,18 +200,7 @@ def objective(trial):
     test_preds = scVAEEstimator(config)
 
     # Evaluate
-
-    print("test preds shape:", test_preds.shape)
-    print(f"test preds type: {type(test_preds)}")
-    print("test labels shape:", valid_labels_npy.shape)
-    print(f"test labels type: {type(valid_labels_npy)}")
-
-    mean_gene_ks = calc_ks(test_preds, valid_labels_npy, "mean_gene")
-    var_gene_ks = calc_ks(test_preds, valid_labels_npy, "var_gene")
-    mean_cell_ks = calc_ks(test_preds, valid_labels_npy, "mean_cell")
-    var_cell_ks = calc_ks(test_preds, valid_labels_npy, "var_cell")
-
-    score = mean_gene_ks + var_gene_ks + mean_cell_ks + var_cell_ks
+    score = calc_ks(test_preds, valid_labels_npy)
 
     return score
 
