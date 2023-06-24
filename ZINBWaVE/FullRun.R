@@ -26,7 +26,12 @@ normalAugmentation <- function() {
   # Read data
 
   # save_dir = paste("/users/srajakum/scratch/Structure_VAE_scRNA_Simulator/baseline_results/ZINBWaVE/", args$study, "/tp_", args$ttp, sep='')
+  date_time = format(Sys.time(), "%Y-%m-%d-at-%H-%M-%S")
+
+  # create new timestamped directory
+  save_dir = paste(save_dir, paste(date_time, "_ttp_", args$ttp, sep=''), sep='/')
   if (!dir.exists(save_dir)) {dir.create(save_dir)}
+
 
   if (args$load_model) {
     zinb_model = readRDS(paste(save_dir, 'WOT-scDesign2_copula_model.rds', sep = '/'))
@@ -34,13 +39,13 @@ normalAugmentation <- function() {
     print(sprintf('filtered test data shape: %s x %s', dim(filteredTestData)[1], dim(filteredTestData)[2]))
   } else {
     if (grepl("mouse", args$study)) {
-      train_filename <- paste(data_dir,"mouse_cortex", args$study, "upto_tp", args$ttp, "train_data.mtx", sep='/')
+      train_filename <- paste(data_dir,"mouse_cortex", args$study, paste("upto_tp", args$ttp, sep=''), "train_data.mtx", sep='/')
       print(train_filename)
-      test_filename <- paste(data_dir, "mouse_cortex", args$study, "upto_tp", args$ttp, "test_data.mtx", sep='/')
+      test_filename <- paste(data_dir, "mouse_cortex", args$study, paste("upto_tp", args$ttp, sep=''), "test_data.mtx", sep='/')
       print(test_filename)
     } else {
-      train_filename <- paste(data_dir, args$study, "upto_tp", args$ttp, "train_data.mtx", sep='/')
-      test_filename <- paste(data_dir, args$study, "upto_tp", args$ttp, "test_data.mtx", sep='/')
+      train_filename <- paste(data_dir, args$study, paste("upto_tp", args$ttp, sep=''), "train_data.mtx", sep='/')
+      test_filename <- paste(data_dir, args$study, paste("upto_tp", args$ttp, sep=''), "test_data.mtx", sep='/')
     }
      
     trainData <- loadCellByGeneData(train_filename) # gene x cell
@@ -124,6 +129,7 @@ normalAugmentation <- function() {
   mean_var_gene_predictions = mean_gene_predictions / (var_gene_predictions + eps)
   mean_var_gene_ks = ks.test(mean_var_gene_predictions, mean_var_gene_labels)$statistic
 
+
   ks_df = data.frame('ks' = c(mean_gene_ks, var_gene_ks, mean_var_gene_ks, mean_cell_ks, var_cell_ks, mean_var_cell_ks), row.names = c('mean_gene', 'var_gene', 'mean_var_gene', 'mean_cell', 'var_cell', 'mean_var_cell'))
   write.csv(ks_df, file=paste(save_dir, "ks_stats.csv", sep='/'))
 
@@ -158,7 +164,6 @@ normalAugmentation <- function() {
   # no longer saving predictions since they take up too much space    
   # writeMM(as(predictions, "sparseMatrix"), file = paste(save_dir, 'WOT-ZINBWaVE_estimation.mtx', sep = '/'))
   print("Finished saving.")
-
 }
 
 
@@ -222,6 +227,7 @@ parser$add_argument('--data_dir', type = "character")
 args <- parser$parse_args()
 
 save_dir = args$save_dir
+data_dir = args$data_dir
 
 normalAugmentation()
 #clusterAugmentation()
