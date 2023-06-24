@@ -338,9 +338,7 @@ print(
     )
 )
 
-path = os.path.join(
-    args.save_dir, "scVAE", args.stu, date_and_time + "_ttp_" + str(args.ttp),
-)
+path = os.path.join(args.save_dir, date_and_time + "_ttp_" + str(args.ttp))
 os.mkdir(path)
 
 with open(os.path.join(path, "tuning_info.txt"), "w") as f:

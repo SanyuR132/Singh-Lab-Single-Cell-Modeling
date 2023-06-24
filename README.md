@@ -15,7 +15,7 @@ These instructions are specific to Oscar. For running locally, one can use the c
 
 You may need to edit the script to specify arguments or change Oscar specifications. Do this with `vim {file_name}`
 The command line arguments are as follows:
-* `--load_model`: if TRUE, will load a saved model from the specified save directory
+* `--load_model_date_time`: time stamp of directory that contains the saved model
 * `-ttp`: abbreviation of truncate time point; used to specify upto what timpepoint data should be loaded; set this to 0 for non-time series datasets
 * `--study`: specify what dataset to use; 'drosophila', 'WOT', 'PBMC', 'mouse_cortex1_chromium', 'mouse_cortex2_chromium', 'mouse_cortex1_smart_seq', 'mouse_cortex2_smart_seq'
 * `--save_dir`: path to directory where outputs should be saved
@@ -99,7 +99,7 @@ representation of single-cell data, by modeling data as zero-inflated negative b
 We install the zinbwave [R package](https://github.com/drisso/zinbwave). Notice that this method is not designed for data 
 simulation, but it provides such functions. We adapted scripts from a 
 [benchmark analysis](https://github.com/HelenaLC/simulation-comparison/tree/master/code) for using ZINB-WaVE.
-Requirements: zinbwave, Matrix
+Requirements: zinbwave, Matrix, argparse
 
 * [scVAE](https://academic.oup.com/bioinformatics/article/36/16/4415/5838187): We download source codes from the 
 [GitHub repository](https://github.com/scvae/scvae) and invoke functions in [Models/scvae/Running.py](Models/scvae/Running.py).

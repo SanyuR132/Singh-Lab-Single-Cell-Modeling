@@ -577,8 +577,8 @@ def plot_cc_metrics(test_preds, test_labels, test_prev=np.array([])):
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-lhsdt", "--load_hyper_struct_date_and_time", type=str)
-parser.add_argument("-ttp", '--truncate_time_point', type=int)
-parser.add_argument("-stu", '--study', type=str)
+parser.add_argument("-ttp", "--truncate_time_point", type=int)
+parser.add_argument("-stu", "--study", type=str)
 parser.add_argument("--data_dir", type=str)
 parser.add_argument("--save_dir", type=str)
 parser.add_argument("--hyperparameters_dir", type=str)
@@ -677,9 +677,7 @@ test_preds = normalAugmentation(
 print("test labels shape:", test_labels_npy.shape)
 print("test preds shape:", test_preds.shape)
 
-save_dir = os.path.join(
-    args.save_dir, "scVAE", args.stu, date_and_time + "_ttp_" + str(args.ttp),
-)
+save_dir = os.path.join(args.save_dir, date_and_time + "_ttp_" + str(args.ttp))
 
 if args.lhsdt:
     save_dir += "_tuned"
