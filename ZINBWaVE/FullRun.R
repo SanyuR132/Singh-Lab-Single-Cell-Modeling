@@ -55,6 +55,10 @@ normalAugmentation <- function() {
     trainData <- round(trainData) # gene x cell
     testData <- loadCellByGeneData(test_filename) # gene x cell
 
+    print('Before filtering: ')
+    print(paste("training data dim", c(dim(trainData)[1], dim(trainData)[2])))
+    print(paste("testing data dim", c(dim(testData)[1], dim(testData)[2])))
+
     trainGeneFilter = which(rowSums(trainData) > 0)
     testGeneFilter = which(rowSums(testData) > 0)
     totalGeneFilter = intersect(trainGeneFilter, testGeneFilter)
@@ -62,12 +66,20 @@ normalAugmentation <- function() {
     print(sprintf("Number of genes kept only in testing data: %s", length(testGeneFilter)))
     print(sprintf("Number of genes kept overall: %s", length(totalGeneFilter)))
 
-    print('Before filtering: ')
-    print(paste("training data dim", c(dim(trainData)[1], dim(trainData)[2])))
-    print(paste("testing data dim", c(dim(testData)[1], dim(testData)[2])))
-
     filteredTrainData = trainData[totalGeneFilter,]
     filteredTestData = testData[totalGeneFilter,]
+
+    trainCellFilter = which(colSums(filteredTrainData) > 0)
+    testCellFilter = which(colSums(filteredTestData) > 0)
+    print(sprintf("Number of cells kept only in training data: %s", length(trainCellFilter)))
+    print(sprintf("Number of cells kept only in testing data: %s", length(testCellFilter)))
+
+    filteredTrainData = filteredTrainData[,trainCellFilter]
+    filteredTestData = filteredTestData[,testCellFilter]
+
+    print("remaining zero-count cells in train and test: ")
+    print(which(colSums(filteredTrainData) == 0))
+    print(which(colSums(filteredTestData) == 0))
 
     print("remaining zero-count genes in train and test: ")
     print(which(rowSums(filteredTrainData) == 0))
