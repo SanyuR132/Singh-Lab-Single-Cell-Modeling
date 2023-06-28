@@ -15,7 +15,7 @@ These instructions are specific to Oscar. For running locally, one can use the c
 
 You may need to edit the script to specify arguments or change Oscar specifications. Do this with `vim {file_name}`
 The command line arguments are as follows:
-* `--load_model_date_time`: time stamp of directory that contains the saved model
+* `--load_model_date_time`: time stamp of directory that contains the saved model; use this if you have a saved model from a previous run (or a run where an error occurs after training is finished) as avoiding retraining will save time
 * `-ttp`: abbreviation of truncate time point; used to specify upto what timpepoint data should be loaded; set this to 0 for non-time series datasets
 * `--study`: specify what dataset to use; 'drosophila', 'WOT', 'PBMC', 'mouse_cortex1_chromium', 'mouse_cortex2_chromium', 'mouse_cortex1_smart_seq', 'mouse_cortex2_smart_seq'
 * `--save_dir`: path to directory where outputs should be saved
@@ -23,9 +23,7 @@ The command line arguments are as follows:
 
 A new timestamped directory will be created inside the specified save directory with the following format: {year}-{month}-{day}-at-{hour}-{minute}-{second}
 This directory will contain the following outputs:
-* `ks_stats.csv`: a csv file with all the marginal ks statistics
-* `ks_plots.png`: histograms of all the marginal distributions (true and predicted on the same graph)
-* `cc_plot.png`: a scatter plot of the per-gene mean values of the true vs predicted expression matrix
+* `all_stats.csv`: a csv file with all the marginal ks statistics as well the pearson and spearman correlations
 
 Tuning is not implemented for ZINB-WaVE because R does not have a satisfactory tuning package (I tried `ParBayesianOptimization` but it had a lot of issues)
 

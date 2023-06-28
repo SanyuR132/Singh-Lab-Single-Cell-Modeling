@@ -97,9 +97,9 @@ normalAugmentation <- function() {
         invokeRestart('muffleWarning')
       })
     
-    saveRDS(zinb_model, file = paste(save_dir, "WOT-ZINBWaVE_model.rds", sep = '/'))
-    writeMM(as(filteredTestData, "sparseMatrix"), file = paste(save_dir, 'WOT-ZINBWaVE_test_data.mtx', sep = '/'))
-    write.csv(totalGeneFilter, paste(save_dir, "WOT-ZINBWaVE_gene_filter.csv", sep='/'), row.names = FALSE)
+    saveRDS(zinb_model, file = paste(save_dir, paste(args$study, "-ZINBWaVE_model.rds", sep=''), sep = '/'))
+    writeMM(as(filteredTestData, "sparseMatrix"), file = paste(save_dir, paste(args$study, "-ZINBWaVE_test_data.mtx", sep=''), sep = '/'))
+    write.csv(totalGeneFilter, paste(save_dir, paste(args$study, "-ZINBWaVE_gene_filter.csv", sep=''), sep='/'), row.names = FALSE)
     print("Finished fitting and saving") 
   }
 
@@ -119,7 +119,7 @@ normalAugmentation <- function() {
   test_data = filteredTestData
 
   # plot histograms from each stat and get ks values
-  stat_vec = c('mean_gene', 'var_gene', 'mean_var_gene', 'mean_cell', 'var_cell', 'mean_var_cell')
+  stat_vec = c('mean_gene_ks', 'var_gene_ks', 'mean_var_gene_ks', 'mean_cell_ks', 'var_cell_ks', 'mean_var_cell_ks')
   ks_vec = c()
   hist_vec = c()
   num_bins = 50
@@ -142,8 +142,8 @@ normalAugmentation <- function() {
     plot(preds_hist, add=TRUE)
   }
 
-  ks_df = data.frame('ks' = ks_vec, row.names = stat_vec)
-  write.csv(ks_df, file=paste(save_dir, "ks_stats.csv", sep='/'))
+  stat_df = data.frame('value' = ks_vec, row.names = stat_vec)
+  write.csv(stat_df, file=paste(save_dir, "all_stats.csv", sep='/'))
 
   # ks_plots = ggarrange(hist_vec[1], hist_vec[2], hist_vec[3], hist_vec[4], hist_vec[5], hist_vec[6], labels = rownames(ks_df), ncol = 3, nrow=2)
   # ggsave(paste(save_dir, 'ks_plots.png', sep='/'))
@@ -153,10 +153,11 @@ normalAugmentation <- function() {
   mean_gene_predictions = rowMeans(predictions)
   pcc = cor(mean_gene_labels, mean_gene_predictions, method = 'pearson')
   scc = cor(mean_gene_labels, mean_gene_predictions, method = 'spearman')
-  cc_plot = plot(mean_gene_labels, mean_gene_predictions, xlab='mean gene labels', ylab='mean gene predictions', col='blue')
-  text(40, 10, paste('PCC = ', round(pcc, 2) , "\n", "SCC = ", round(scc,2)))
+  stat_df = rbind(stat_df, data.frame('value'=c(pcc, scc), row.names=c('PCC', 'SCC')))
+  ## cc_plot is unnecessary because you just get a straight a horizontal line (high correlation)
+  # cc_plot = plot(mean_gene_labels, mean_gene_predictions, xlab='mean gene labels', ylab='mean gene predictions', col='blue')
+  # text(40, 10, paste('PCC = ', round(pcc, 2) , "\n", "SCC = ", round(scc,2)))
 
-  ggsave('cc_plot.png', plot = cc_plot, device='png', path=save_dir)
 
   # no longer saving predictions since they take up too much space    
   # writeMM(as(predictions, "sparseMatrix"), file = paste(save_dir, 'WOT-ZINBWaVE_estimation.mtx', sep = '/'))
@@ -166,31 +167,31 @@ normalAugmentation <- function() {
 
 get_ks <- function(stat_type, test_data, predictions) {
   eps = 1e-6
-  if (stat_type == 'mean_cell'){
+  if (stat_type == 'mean_cell_ks'){
     labels = mean_cell_labels = colMeans(test_data)
     predictions = mean_cell_predictions = colMeans(predictions)
   }
-  if (stat_type == 'mean_gene') {
+  if (stat_type == 'mean_gene_ks') {
     labels = mean_gene_labels = rowMeans(test_data)
     predictions = mean_gene_predictions = rowMeans(predictions)
   }
 
-  if (stat_type == 'var_cell'){  
+  if (stat_type == 'var_cell_ks'){  
     labels = var_cell_labels = mapply(var, asplit(test_data, 2))
     predictions = var_cell_predictions = mapply(var, asplit(predictions, 2))
   }
 
-  if (stat_type == 'var_gene')  {
+  if (stat_type == 'var_gene_ks')  {
     labels = var_gene_labels = mapply(var, asplit(test_data, 1))
     predictions = var_gene_predictions = mapply(var, asplit(predictions, 1))
   }
 
-  if (stat_type == 'mean_var_cell') {
+  if (stat_type == 'mean_var_cell_ks') {
     labels = mean_var_cell_labels = colMeans(test_data) / (mapply(var, asplit(test_data, 2)) + eps)
     predictions = mean_var_cell_predictions = colMeans(predictions) / (mapply(var, asplit(predictions, 2)) + eps)
   }
 
-  if (stat_type == 'mean_var_gene') {
+  if (stat_type == 'mean_var_gene_ks') {
     labels = mean_var_gene_labels = rowMeans(test_data) / (mapply(var, asplit(test_data, 1)) + eps)
     predictions = mean_var_gene_predictions = rowMeans(predictions) / (mapply(var, asplit(predictions, 1)) + eps)
   }
