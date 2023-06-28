@@ -143,7 +143,6 @@ normalAugmentation <- function() {
   }
 
   stat_df = data.frame('value' = ks_vec, row.names = stat_vec)
-  write.csv(stat_df, file=paste(save_dir, "all_stats.csv", sep='/'))
 
   # ks_plots = ggarrange(hist_vec[1], hist_vec[2], hist_vec[3], hist_vec[4], hist_vec[5], hist_vec[6], labels = rownames(ks_df), ncol = 3, nrow=2)
   # ggsave(paste(save_dir, 'ks_plots.png', sep='/'))
@@ -154,6 +153,8 @@ normalAugmentation <- function() {
   pcc = cor(mean_gene_labels, mean_gene_predictions, method = 'pearson')
   scc = cor(mean_gene_labels, mean_gene_predictions, method = 'spearman')
   stat_df = rbind(stat_df, data.frame('value'=c(pcc, scc), row.names=c('PCC', 'SCC')))
+  write.csv(stat_df, file=paste(save_dir, "all_stats.csv", sep='/'))
+
   ## cc_plot is unnecessary because you just get a straight a horizontal line (high correlation)
   # cc_plot = plot(mean_gene_labels, mean_gene_predictions, xlab='mean gene labels', ylab='mean gene predictions', col='blue')
   # text(40, 10, paste('PCC = ', round(pcc, 2) , "\n", "SCC = ", round(scc,2)))
