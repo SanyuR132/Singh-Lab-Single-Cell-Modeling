@@ -1,0 +1,53 @@
+## SLURM PROLOG ###############################################################
+##    Job ID : 10304930
+##  Job Name : zinbwave_dros
+##  Nodelist : gpu1403
+##      CPUs : 
+##  Mem/Node : 30720 MB
+## Directory : /oscar/data/rsingh47/ylei29/Singh-Lab-Single-Cell-Modelling-Structure-Baselines/ZINBWaVE
+##   Job Started : Wed Jun 28 00:59:35 EDT 2023
+###############################################################################
+[1] "\nDesription:\n  Experiment with ZINB-WaVE method.\n\n\nAuthor:\n  Jiaqi Zhang\n"
+[1] "Filename : ../../Data/drosophila/upto_tp10/train_data.mtx"
+[1] "Num of cells : 38500"
+[1] "Num of genes : 1000"
+[1] "Filename : ../../Data/drosophila/upto_tp10/test_data.mtx"
+[1] "Num of cells : 8250"
+[1] "Num of genes : 1000"
+[1] "Before filtering: "
+[1] "training data dim 1000"  "training data dim 38500"
+[1] "testing data dim 1000" "testing data dim 8250"
+[1] "Number of genes kept only in training data: 739"
+[1] "Number of genes kept only in testing data: 638"
+[1] "Number of genes kept overall: 624"
+[1] "Number of cells kept only in training data: 35370"
+[1] "Number of cells kept only in testing data: 7566"
+[1] "remaining zero-count cells in train and test: "
+integer(0)
+integer(0)
+[1] "remaining zero-count genes in train and test: "
+integer(0)
+integer(0)
+[1] "After filtering :"
+[1] "train data shape: 624 x 35370"
+[1] "test data shape: 624 x 7566"
+[1] "Warnings in training: "
+[1] "Started Model Fitting"
+   user  system elapsed 
+154.639  55.438 323.084 
+   user  system elapsed 
+412.333   4.229 626.823 
+   user  system elapsed 
+156.720  55.742 328.693 
+   user  system elapsed 
+615.401   6.340 623.281 
+   user  system elapsed 
+180.881  62.186 379.713 
+   user  system elapsed 
+575.944   6.533 583.918 
+[1] "Finished fitting and saving"
+[1] "Warnings in predicting: "
+[1] "Started Predicting"
+[1] "Finished predicting"
+[1] "predictions shape : 624 x 7566"
+[1] "Finished saving."
