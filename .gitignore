@@ -1,0 +1,5 @@
+# all basch scripts
+*.sh
+
+# all logs from bash scripts
+*.out
