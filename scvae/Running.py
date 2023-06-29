@@ -306,7 +306,10 @@ def modelTrainForCV(config):
     print(f'model type: {args_dict["model_type"]}')
 
     args_dict["data_set_file_or_name"] = os.path.join(
-        args_dict["data_directory"], "upto_tp" + str(config["ttp"]), "train_data.mtx"
+        config["data_dir"],
+        config["study"],
+        "upto_tp" + str(config["ttp"]),
+        "train_data.mtx",
     )
 
     print("data set file name:", args_dict["data_set_file_or_name"])
@@ -334,7 +337,10 @@ def modelTrainForCV(config):
     args_dict["values"] = config["preprocessed_test_values"]
 
     args_dict["data_set_file_or_name"] = os.path.join(
-        args_dict["data_directory"], "upto_tp" + str(config["ttp"]), "test_data.mtx"
+        config["data_dir"],
+        config["study"],
+        "upto_tp" + str(config["ttp"]),
+        "test_data.mtx",
     )
     args_dict["labels"] = config["cell_clusters"]["test_clusters"]
 
