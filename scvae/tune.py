@@ -39,9 +39,9 @@ import shutil
 parser = argparse.ArgumentParser()
 
 parser.add_argument(
-    "-stu", "--study", default="WOT", type=str, help="Which dataset to use",
+    "-stu", default="WOT", type=str, help="Which dataset to use",
 )
-parser.add_argument("-ttp", "--truncate_time_point", type=int)
+parser.add_argument("-ttp", type=int)
 parser.add_argument(
     "-s", default="KS", type=str,
 )
@@ -262,32 +262,52 @@ if args.study == "WOT":
 
 elif args.study == "drosophila":
     config_file = "./DrosophilaData_exp.json"
-    data_path = (args.data_dir, "drosophila/", "upto_tp" + str(args.truncate_time_point))
+
+    data_path = os.path.join(args.data_dir, "drosophila", "upto_tp" + str(args.ttp))
+
 
 
 elif args.study == "mouse_cortex1_chromium":
     config_file = "./MouseCortex1Chromium_exp.json"
-    data_path = "/users/srajakum/scratch/Structure_VAE_scRNA_Simulator/Data/mouse_cortex/mouse_cortex1_chromium/upto_tp0"
+    data_path = os.path.join(
+        args.data_dir,
+        "mouse_cortex",
+        "mouse_cortex1_chromium",
+        "upto_tp" + str(args.ttp),
+    )
 
 
 elif args.study == "mouse_cortex2_chromium":
     config_file = "./MouseCortex2Chromium_exp.json"
-    data_path = "/users/srajakum/scratch/Structure_VAE_scRNA_Simulator/Data/mouse_cortex/mouse_cortex2_chromium/upto_tp0"
+    data_path = os.path.join(
+        args.data_dir,
+        "mouse_cortex",
+        "mouse_cortex2_chromium",
+        "upto_tp" + str(args.ttp),
+    )
 
 elif args.study == "mouse_cortex1_smart_seq":
     config_file = "./MouseCortex1SmartSeq_exp.json"
-    data_path = "/users/srajakum/scratch/Structure_VAE_scRNA_Simulator/Data/mouse_cortex/mouse_cortex1_smart_seq/upto_tp0"
+    data_path = os.path.join(
+        args.data_dir,
+        "mouse_cortex",
+        "mouse_cortex1_smart_seq",
+        "upto_tp" + str(args.ttp),
+    )
 
 
 elif args.study == "mouse_cortex2_smart_seq":
     config_file = "./MouseCortex2SmartSeq_exp.json"
-    data_path = "/users/srajakum/scratch/Structure_VAE_scRNA_Simulator/Data/mouse_cortex/mouse_cortex2_smart_seq/upto_tp0"
+    data_path = os.path.join(
+        args.data_dir,
+        "mouse_cortex",
+        "mouse_cortex2_smart_seq",
+        "upto_tp" + str(args.ttp),
+    )
 
 elif args.study == "PBMC":
     config_file = "./PBMCData_exp.json"
-    data_path = (
-        "/users/srajakum/scratch/Structure_VAE_scRNA_Simulator/Data/PBMC/upto_tp0"
-    )
+    data_path = os.path.join(args.data_dir, "PBMC", "upto_tp" + str(args.ttp))
 
 train_file_path = os.path.join(data_path, "train_data.mtx")
 valid_file_path = os.path.join(data_path, "valid_data.mtx")
