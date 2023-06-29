@@ -206,7 +206,7 @@ def objective(trial):
 
 
 # Static parameters configuration
-if args.stu == "WOT":
+if args.study == "WOT":
     config_file = "./WOTData_exp.json"
     # Change data path based on system
     data_path = (args.data_dir, "WOT", "upto_tp" + str(args.ttp))
@@ -260,12 +260,14 @@ if args.stu == "WOT":
 #     'sample_size': preprocessed_test_values.shape[0]
 # }
 
-elif args.stu == "drosophila":
+elif args.study == "drosophila":
     config_file = "./DrosophilaData_exp.json"
+
     data_path = os.path.join(args.data_dir, "drosophila", "upto_tp" + str(args.ttp))
 
 
-elif args.stu == "mouse_cortex1_chromium":
+
+elif args.study == "mouse_cortex1_chromium":
     config_file = "./MouseCortex1Chromium_exp.json"
     data_path = os.path.join(
         args.data_dir,
@@ -275,7 +277,7 @@ elif args.stu == "mouse_cortex1_chromium":
     )
 
 
-elif args.stu == "mouse_cortex2_chromium":
+elif args.study == "mouse_cortex2_chromium":
     config_file = "./MouseCortex2Chromium_exp.json"
     data_path = os.path.join(
         args.data_dir,
@@ -284,7 +286,7 @@ elif args.stu == "mouse_cortex2_chromium":
         "upto_tp" + str(args.ttp),
     )
 
-elif args.stu == "mouse_cortex1_smart_seq":
+elif args.study == "mouse_cortex1_smart_seq":
     config_file = "./MouseCortex1SmartSeq_exp.json"
     data_path = os.path.join(
         args.data_dir,
@@ -294,7 +296,7 @@ elif args.stu == "mouse_cortex1_smart_seq":
     )
 
 
-elif args.stu == "mouse_cortex2_smart_seq":
+elif args.study == "mouse_cortex2_smart_seq":
     config_file = "./MouseCortex2SmartSeq_exp.json"
     data_path = os.path.join(
         args.data_dir,
@@ -303,7 +305,7 @@ elif args.stu == "mouse_cortex2_smart_seq":
         "upto_tp" + str(args.ttp),
     )
 
-elif args.stu == "PBMC":
+elif args.study == "PBMC":
     config_file = "./PBMCData_exp.json"
     data_path = os.path.join(args.data_dir, "PBMC", "upto_tp" + str(args.ttp))
 
@@ -329,7 +331,7 @@ config = {
     "preprocessed_test_values": valid_labels,
     "sample_size": valid_labels.shape[0],
     "cell_clusters": cell_clusters_dict,
-    "ttp": args.ttp,
+    "ttp": args.truncate_time_point,
 }
 
 
@@ -356,7 +358,7 @@ print(
     )
 )
 
-path = os.path.join(args.save_dir, date_and_time + "_ttp_" + str(args.ttp))
+path = os.path.join(args.save_dir, date_and_time + "_ttp_" + str(args.truncate_time_point))
 os.mkdir(path)
 
 with open(os.path.join(path, "tuning_info.txt"), "w") as f:

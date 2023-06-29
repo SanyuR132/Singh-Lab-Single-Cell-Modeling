@@ -8,9 +8,11 @@
 #SBATCH -o res_dros_tuning.out
 #SBATCH -e err_dros_tuning.out
 #SBATCH --mail-type=END,FAIL,TIME_LIMIT,BEGIN
-#SBATCH --mail-user=sanyu_rajakumar@brown.edu
+#SBATCH --mail-user=yuqi_lei@brown.edu
 module load anaconda/3-5.2.0 cudnn cuda/11.1.1 gcc/10.2
-source activate ~/scratch/anaconda/scVAE
-python /users/srajakum/scratch/Structure_VAE_scRNA_Simulator/Models/scvae/tune.py -stu drosophila -ttp 3 -tuti 720 --tune_all 
+source activate scvae
+which python
+~/anaconda/scvae/bin/python ./tune.py -stu drosophila -ttp 3 -tuti 10 --tune_all --save_dir ../../Output/drosophila/scvae --data_dir ../../Data 
+
 # latent size upper bound is 64 be default
 # not tuning anything, checking if default GMVAE works

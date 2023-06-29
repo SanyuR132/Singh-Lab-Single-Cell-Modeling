@@ -1,0 +1,18 @@
+module: unloading 'anaconda/3-5.2.0'
+module: loading 'anaconda/3-5.2.0'
+module: anaconda: "See https://docs.ccv.brown.edu/oscar/software/anaconda for potential issues on VNC and batch jobs"
+module: loading 'cudnn/8.2.0'
+module: cudnn: To use: module load cuda/11.1.1 gcc/10.2
+module: loading 'cuda/11.1.1'
+module: cuda: To use: module load gcc/10.2
+module: loading 'gcc/10.2'
+module: gcc: "Note: loading the gcc module overrides the gcc version on the system.  If you want to revert to the version of gcc provided by the OS, unload the gcc module."
+OMP: Info #277: omp_set_nested routine deprecated, please use omp_set_max_active_levels instead.
+/gpfs/data/rsingh47/ylei29/anaconda/scvae/lib/python3.6/site-packages/numba/np/ufunc/parallel.py:365: NumbaWarning: [1mThe TBB threading layer requires TBB version 2019.5 or later i.e., TBB_INTERFACE_VERSION >= 11005. Found TBB_INTERFACE_VERSION = 6103. The TBB threading layer is disabled.[0m
+  warnings.warn(problem)
+Traceback (most recent call last):
+  File "./tune.py", line 292, in <module>
+    train_file_path = os.path.join(data_path, "train_data.mtx")
+  File "/gpfs/data/rsingh47/ylei29//anaconda/scvae/lib/python3.6/posixpath.py", line 80, in join
+    a = os.fspath(a)
+TypeError: expected str, bytes or os.PathLike object, not tuple

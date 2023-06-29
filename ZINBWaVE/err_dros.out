@@ -1,0 +1,50 @@
+module: loading 'R/4.1.0'
+module: R: To use: module load gcc/10.2 pcre2/10.35 intel/2020.2 texlive/2018
+module: loading 'gcc/10.2'
+module: gcc: "Note: loading the gcc module overrides the gcc version on the system.  If you want to revert to the version of gcc provided by the OS, unload the gcc module."
+module: loading 'pcre2/10.35'
+module: unloading 'intel/2017.0'
+module: loading 'intel/2020.2'
+module: loading 'texlive/2018'
+Create model:
+ok
+Initialize parameters:
+ok
+Optimize parameters:
+Iteration 1
+penalized log-likelihood = -6702312.43467513
+After dispersion optimization = -6606094.81947625
+After right optimization = -6537742.69932038
+After orthogonalization = -6537742.69932038
+After left optimization = -6523448.55203329
+After orthogonalization = -6523448.55203329
+Iteration 2
+penalized log-likelihood = -6523448.55203329
+After dispersion optimization = -6514233.87465349
+After right optimization = -6513035.04846753
+After orthogonalization = -6513035.04846753
+After left optimization = -6512692.43717102
+After orthogonalization = -6512692.43717102
+Iteration 3
+penalized log-likelihood = -6512692.43717102
+After dispersion optimization = -6512689.14254954
+After right optimization = -6512578.19243972
+After orthogonalization = -6512578.19243972
+After left optimization = -6512537.98818011
+After orthogonalization = -6512537.98818011
+Iteration 4
+penalized log-likelihood = -6512537.98818011
+ok
+Warning messages:
+1: In ks.test(predictions, labels) :
+  p-value will be approximate in the presence of ties
+2: In ks.test(predictions, labels) :
+  p-value will be approximate in the presence of ties
+3: In ks.test(predictions, labels) :
+  p-value will be approximate in the presence of ties
+4: In ks.test(predictions, labels) :
+  p-value will be approximate in the presence of ties
+5: In ks.test(predictions, labels) :
+  p-value will be approximate in the presence of ties
+6: In ks.test(predictions, labels) :
+  p-value will be approximate in the presence of ties
