@@ -1,10 +1,10 @@
 ## SLURM PROLOG ###############################################################
-##    Job ID : 10313856
+##    Job ID : 10327167
 ##  Job Name : scvae_dros_tuning
-##  Nodelist : gpu2004
+##  Nodelist : gpu2101
 ##      CPUs : 
 ##  Mem/Node : 81920 MB
 ## Directory : /oscar/data/rsingh47/ylei29/Singh-Lab-Single-Cell-Modelling-Structure-Baselines/scvae
-##   Job Started : Thu Jun 29 06:03:01 EDT 2023
+##   Job Started : Fri Jun 30 17:00:30 EDT 2023
 ###############################################################################
-/gpfs/runtime/opt/anaconda/3-5.2.0/bin/python
+/gpfs/data/rsingh47/ylei29/anaconda/scvae/bin/python

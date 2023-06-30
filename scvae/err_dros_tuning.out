@@ -1,4 +1,3 @@
-module: unloading 'anaconda/3-5.2.0'
 module: loading 'anaconda/3-5.2.0'
 module: anaconda: "See https://docs.ccv.brown.edu/oscar/software/anaconda for potential issues on VNC and batch jobs"
 module: loading 'cudnn/8.2.0'
@@ -10,9 +9,4 @@ module: gcc: "Note: loading the gcc module overrides the gcc version on the syst
 OMP: Info #277: omp_set_nested routine deprecated, please use omp_set_max_active_levels instead.
 /gpfs/data/rsingh47/ylei29/anaconda/scvae/lib/python3.6/site-packages/numba/np/ufunc/parallel.py:365: NumbaWarning: [1mThe TBB threading layer requires TBB version 2019.5 or later i.e., TBB_INTERFACE_VERSION >= 11005. Found TBB_INTERFACE_VERSION = 6103. The TBB threading layer is disabled.[0m
   warnings.warn(problem)
-Traceback (most recent call last):
-  File "./tune.py", line 292, in <module>
-    train_file_path = os.path.join(data_path, "train_data.mtx")
-  File "/gpfs/data/rsingh47/ylei29//anaconda/scvae/lib/python3.6/posixpath.py", line 80, in join
-    a = os.fspath(a)
-TypeError: expected str, bytes or os.PathLike object, not tuple
+[32m[I 2023-06-30 17:00:55,974][0m A new study created in memory with name: no-name-190fb72b-f45c-489a-b75d-55cb6dc17f53[0m

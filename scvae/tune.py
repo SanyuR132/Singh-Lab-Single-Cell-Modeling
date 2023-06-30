@@ -41,7 +41,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
     "-stu", default="WOT", type=str, help="Which dataset to use",
 )
-parser.add_argument("-ttp", type=int, help = "truncate time point")
+parser.add_argument("-ttp", type=int)
 parser.add_argument(
     "-s", default="KS", type=str,
 )
@@ -121,7 +121,7 @@ def calc_ks(test_preds, test_labels):
             )
 
         stat_test_labels = np.squeeze(stat_test_labels)
-        ks_total += ks_2samp(stat_test_preds, stat_test_labels)
+        ks_total += ks_2samp(stat_test_preds, stat_test_labels).statistic
 
     return ks_total
 
@@ -262,9 +262,7 @@ if args.stu == "WOT":
 
 elif args.stu == "drosophila":
     config_file = "./DrosophilaData_exp.json"
-
     data_path = os.path.join(args.data_dir, "drosophila", "upto_tp" + str(args.ttp))
-
 
 
 elif args.stu == "mouse_cortex1_chromium":
@@ -332,6 +330,8 @@ config = {
     "sample_size": valid_labels.shape[0],
     "cell_clusters": cell_clusters_dict,
     "ttp": args.ttp,
+    "data_dir": args.data_dir,
+    "study": args.stu,
 }
 
 
