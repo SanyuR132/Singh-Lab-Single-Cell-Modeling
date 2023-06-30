@@ -13,6 +13,6 @@ module load anaconda/3-5.2.0 cudnn cuda/11.1.1 gcc/10.2
 source activate scvae
 which python
 ~/anaconda/scvae/bin/python ./tune.py -stu drosophila -ttp 3 -tuti 10 --tune_all --save_dir ../../Output/drosophila/scvae --data_dir ../../Data 
-
+# Data dir and save dir should be modified or placed under same construction
 # latent size upper bound is 64 be default
 # not tuning anything, checking if default GMVAE works
