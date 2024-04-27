@@ -6,7 +6,7 @@ This repository contains the code for running, tuning, and analysing `ZINB-WaVE`
 
 ## Quick Start
 
-These instructions are specific to Oscar. For running locally, one can use the commands contained in the bash scripts without all the Oscar-specific specifications (i.e, you can use the uncommented stuff).
+These instructions are specific to [OSCAR](https://docs.ccv.brown.edu/oscar). For running locally, one can use the commands contained in the bash scripts without all the Oscar-specific specifications (i.e, you can use the uncommented stuff).
 
 ### ZINB-WaVE
 * Run `module load R/{version}` in the command line with the specific version of R in which the necessary packages are installed (see "Models")
